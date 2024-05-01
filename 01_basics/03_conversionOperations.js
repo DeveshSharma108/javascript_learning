@@ -44,9 +44,9 @@ x++;
 console.log(`x:${x}`);
 // Expected output: "x:4, y:3"
 
-let a = 3;
-const b = ++a;
+let p = 3;
+const q = ++a;
 
-console.log(`a:${a}, b:${b}`);
+console.log(`p:${p}, q:${q}`);
 // Expected output: "a:4, b:4"
 
