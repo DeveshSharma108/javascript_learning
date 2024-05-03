@@ -53,3 +53,4 @@ let regex = /ab+c/;
 console.log(typeof regex); // "object"
 
 // what is the difference between primitive and non primitive data types?
+// javascript is a dynamically typed language --> what are statically and dynamically typed languages?
