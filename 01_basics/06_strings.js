@@ -29,3 +29,6 @@ console.log("Secret Key: ",secret_key)
 
 
 
+// substring() vs slice()
+// how slice works when negative values are passed ?
+
