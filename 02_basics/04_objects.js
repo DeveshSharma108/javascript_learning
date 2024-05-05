@@ -48,8 +48,8 @@ console.log("oneplusPad quantity:", oneplusPad);
 
 // what is object de-structring it is also used in react....
 
-
-
+/*after studying functions try --> Write a function to calculate the total number of items in each category.
+Example for smarthones it should output 175(50+60+40+25).*/
 
 
 
