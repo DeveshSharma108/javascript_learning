@@ -1,0 +1,13 @@
+There are two types of javascript execution context
+1.Global execution context
+2.Functional execution context
+
+The execution context is stored in this
+
+Javascript is single threaded language
+
+There are two phases in executio:
+1.Memory Creation phase
+2.Execution phase
+
+https://youtu.be/ByhtOgF6uYM?si=LJ1bUF4kR33iXcb1
