@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Message Decoder</title>
+<style>
+  .highlight {
+    background-color: yellow;
+  }
+  .even-message {
+    color: blue;
+  }
+</style>
+</head>
+<body style="background-color: black; color: white;">
+<h1>Secret Message Decoder</h1>
+<ul id="messageList">
+  <li>Message 1: Nvvg nf gb gur frperg ebbz</li>
+  <li>Message 2: Guvf vf n frperg zrffntr</li>
+  <li>Message 3: Qb lbh xabj gur pbqr?</li>
+  <li>Message 4: Gur pbqr vf 1234</li>
+  <li>Message 5: Lbh unir qrpbqrq gur zrffntr</li>
+</ul>
+
+<h1>Output</h1>
+<ul id="outputList">
+</ul>
+
+
+
+<!--...................................Code......................................-->
+
+<script>
+
+const messages = document.querySelectorAll('#messageList li') 
+
+// console.log(messages[2])
+// messages[2].style.backgroundColor = 'grey';
+
+const third_message = document.querySelector('#messageList li:nth-child(3)')
+third_message.style.backgroundColor = 'grey'
+
+// console.log(third_message)
+
+messages.forEach((message,index)=>{
+  
+  if((index+1)%2 == 0){
+    message.style.backgroundColor = 'purple'
+  }
+})
+
+//messages[4].remove()
+const last_message = document.querySelector('#messageList li:last-child')
+// console.log(last_message)
+// last_message.remove()
+
+// const output1 = document.createElement('li')
+// output1.innerHTML = 'output1'
+// console.log(output1)
+// document.querySelector('#outputList').appendChild(output1)
+
+
+// function to decode cipher(13) text
+
+function decodeCipher13(str) {
+  let decoded = ""
+  for (let i = 0; i < str.length; i++) { 
+    let char = str[i]
+    let charCode = char.charCodeAt(0)
+    if (charCode >= 65 && charCode <= 90) {
+      decoded += decodeUppercase(char)
+    }
+    else if (charCode >= 97 && charCode <= 122) {
+      decoded += decodeLowercase(char)
+    }
+    else {
+      decoded += char
+    }
+  }
+  return decoded
+}
+
+function decodeUppercase(char) {
+  let charCode = char.charCodeAt(0)
+  let decodedCharCode = ((charCode - 65 + 13) % 26) + 65
+  return String.fromCharCode(decodedCharCode)
+}
+
+function decodeLowercase(char) {
+  let charCode = char.charCodeAt(0)
+  let decodedCharCode = ((charCode - 97 + 13) % 26) + 97
+  return String.fromCharCode(decodedCharCode)
+}
+
+const input = []            // cipher messages array
+const output = []           // decoded messages array
+
+messages.forEach((message)=>{
+  const cipher_text = message.textContent.trim()
+  const clean_text = cipher_text.replace(/^Message \d+: /, '')// regular expression
+  // const clean_text = cipherText.slice(cipherText.indexOf(':') + 2);
+  // console.log(clean_text)
+  input.push(clean_text)
+})
+
+// console.log(input)
+
+for (let index = 0; index < input.length; index++) {
+  
+  let a = decodeCipher13(input[index])
+  output.push(a)
+
+}
+
+// console.log(output)
+
+for (let index = 0; index < output.length; index++) {
+  
+  let child_li = document.createElement('li')
+  child_li.textContent = `Output ${index+1}: ${output[index]}`
+  let parent_node_output = document.querySelector('#outputList')
+  parent_node_output.appendChild(child_li)
+  
+}
+
+
+
+</script>
+
+<!--...................................Code......................................-->
+
+</body>
+</html>
