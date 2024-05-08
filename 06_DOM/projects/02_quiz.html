@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Quiz</title>
+    <style>
+      body {
+        background-color: #333;
+        color: #fff;
+        font-family: Arial, sans-serif;
+      }
+      .question {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p><h1>Quiz</h1></p>
+    <form id="quizForm">
+      <p>1. What is the capital city of France ?</p>
+      <input type="radio" id="Madrid" name="Q1" value="Madrid" />
+      <label for="html">Madrid</label>
+      <input type="radio" id="Berlin" name="Q1" value="Berlin" />
+      <label for="css">Berlin</label>
+      <input type="radio" id="Paris" name="Q1" value="Paris" />
+      <label for="javascript">Paris</label>
+      <input type="radio" id="Rome" name="Q1" value="Rome" />
+      <label for="html">Rome</label>
+      <br />
+
+      <p>2. Which is the largest ocean on Earth ?</p>
+      <input type="radio" id="Atlantic" name="Q2" value="Atlantic" />
+      <label for="html">Atlantic</label>
+      <input type="radio" id="Indian" name="Q2" value="Indian" />
+      <label for="html">Indian</label>
+      <input type="radio" id="Pacific" name="Q2" value="Pacific" />
+      <label for="html">Pacific</label>
+      <input type="radio" id="Arctic" name="Q2" value="Arctic" />
+      <label for="html">Arctic</label>
+
+      <br />
+
+      <p>3. Which element has the chemical symbol 'O' ?</p>
+      <input type="radio" id="Nitrogen" name="Q3" value="Nitrogen" />
+      <label for="html">Nitrogen</label>
+      <input type="radio" id="Oxygen" name="Q3" value="Oxygen" />
+      <label for="css">Oxygen</label>
+      <input type="radio" id="Xenon" name="Q3" value="Xenon" />
+      <label for="javascript">Xenon</label>
+      <input type="radio" id="Silicon" name="Q3" value="Silicon" />
+      <label for="html">Silicon</label>
+      <br />
+      <br />
+
+      <button type="submit">Submit Answers</button>
+    </form>
+    <br>
+    <div id="score"></div>
+
+    <script>
+      const form = document.querySelector("#quizForm");
+      const scoreDiv = document.querySelector("#score");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        
+        const correctAnswers = {
+          Q1: "Paris",
+          Q2: "Pacific",
+          Q3: "Oxygen",
+        };
+
+        
+        let score = 0;
+
+        
+        Object.keys(correctAnswers).forEach((question) => {
+          const userAnswer = form[question].value.trim();
+          if (userAnswer === correctAnswers[question]) {
+            score++;
+          }
+        });
+
+        
+        const scorePercentage =
+          (score / Object.keys(correctAnswers).length) * 100;
+
+        
+        scoreDiv.innerHTML = `Your score is: ${Math.round(scorePercentage)}% (${score} out of ${
+          Object.keys(correctAnswers).length
+        } correct)`;
+      });
+    </script>
+  </body>
+</html>
