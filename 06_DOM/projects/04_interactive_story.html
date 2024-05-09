@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Story Game</title>
+    <style>
+      body {
+        background-color: black;
+        color: wheat;
+        font-family: Arial, sans-serif;
+      }
+      #story {
+        margin-bottom: 20px;
+      }
+      .currentScene {
+        margin-bottom: 20px;
+        font-size: xx-large;
+      }
+      .choices {
+        
+        padding: 5px;
+        margin: 5px;
+        display: flex;
+        justify-content: space-evenly;
+        
+      }
+      .choices button{
+        font-size: large;
+        cursor: pointer;
+        
+      }
+      .para-div{
+        display: flex;
+        justify-content: center;
+        
+      }
+
+      .restartDiv{
+        display: flex;
+        justify-content: center;
+        
+      }
+
+      .restart{
+        background-color: yellowgreen;
+        font-size: x-large;
+      }
+
+
+      
+    
+    </style>
+  </head>
+  <body>
+    <div id="story">
+      <!-- Story text and choices will be added here -->
+
+    </div>
+
+    <!--.................................Code...........................................................-->
+
+    <script>
+      const story = {
+        start: {
+          text: "You wake up in a mysterious forest. Two paths lie before you.",
+          choices: [
+            { text: "Take the left path", leadsTo: "leftPath" },
+            { text: "Take the right path", leadsTo: "rightPath" },
+          ],
+        },
+        leftPath: {
+          text: "You encounter a friendly squirrel.",
+          choices: [
+            { text: "Follow the squirrel", leadsTo: "squirrelEnding" },
+            { text: "Continue on the path", leadsTo: "continuePath" },
+          ],
+        },
+        rightPath: {
+          text: "You find a treasure chest.",
+          choices: [
+            { text: "Open the chest", leadsTo: "treasureEnding" },
+            { text: "Ignore the chest", leadsTo: "continuePath" },
+          ],
+        },
+        continuePath: {
+          text: "The path leads to a peaceful village.",
+          choices: [
+            { text: "Settle in the village", leadsTo: "villageEnding" },
+            { text: "Explore the forest further", leadsTo: "exploreEnding" },
+          ],
+        },
+        // Add endings here
+        // Inside the story object
+        squirrelEnding: {
+            text: "The squirrel leads you to a hidden grove filled with food and water. You're safe!",
+            choices: []
+        },
+
+        treasureEnding: {
+            text: "You opened the chest and found precious items that worth a lot of money.",
+            choices: []
+        },
+
+        villageEnding: {
+            text: "You found the peace you were looking for the whole life, you decided to live peacefully in the village.",
+            choices: []
+        },
+
+        exploreEnding: {
+            text: "You are now lost in jungle.",
+            choices: []
+        },
+    };
+
+    function updateScene(sceneName){
+      
+      const display = document.querySelector('#story')
+      display.innerHTML = ""
+
+      const sceneData = story[sceneName]
+      
+      
+      const current_scene = document.createElement('div')
+      current_scene.classList.add('currentScene')
+      const paradiv = document.createElement('div')
+      paradiv.classList.add('para-div')
+      const para = document.createElement('p')
+      para.textContent = story[sceneName].text
+      paradiv.appendChild(para)
+      current_scene.appendChild(paradiv)
+      display.appendChild(current_scene)
+
+      if (sceneData.choices.length > 0){
+
+        const choices = document.createElement('div')
+        choices.classList.add('choices')
+
+        const choice1 = document.createElement('button')
+        choice1.textContent = sceneData.choices[0].text
+        choice1.classList.add('choice1')
+        choice1.addEventListener('click',()=>{
+          updateScene(sceneData.choices[0].leadsTo)
+        })
+        choices.appendChild(choice1)
+
+
+        const choice2 = document.createElement('button')
+        choice2.textContent = sceneData.choices[1].text
+        choice2.classList.add('choice2')
+        choice2.addEventListener('click',()=>{
+          updateScene(sceneData.choices[1].leadsTo)
+        })
+        choices.appendChild(choice2)
+        
+        current_scene.appendChild(choices)
+        display.appendChild(current_scene)
+      }
+      else{
+
+        const start_again_div = document.createElement('div')
+        start_again_div.classList.add('restartDiv')
+        const restart_btn = document.createElement('button')
+        restart_btn.textContent = "Restart ↻"
+        restart_btn.classList.add('restart')
+        restart_btn.addEventListener('click',()=>{updateScene('start')})
+        start_again_div.appendChild(restart_btn)
+        display.appendChild(start_again_div)
+      }
+    
+    }
+
+    updateScene('start')
+
+    
+
+    
+
+    
+    
+    
+    </script>
+
+    <!--.................................Code...........................................................-->
+  </body>
+</html>
