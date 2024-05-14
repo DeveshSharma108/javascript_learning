@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Notes</title>
+  <style>
+
+    body{
+      background-color: #f3f3f3;
+    }
+    #addBtn{
+      background-color: greenyellow;
+      font-size: large;
+    }
+    .addNote{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    .addBtnDiv{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    .removeBtn{
+      border-radius: 11px;
+      background-color: orangered;
+      font-weight: bold;
+      position: absolute;
+      font-size: large;
+
+    }
+    .note{
+      margin-left: 8px;
+      margin-bottom: 8px;
+      border: solid 0.5px;
+      padding: 3px;
+      width: 18vw;
+      height: 25vh;
+      padding: 5px;
+      color: black;
+      font-weight: bolder;
+      
+    }
+
+    .board{
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 20px;
+      
+    }
+    .note p{
+      white-space: pre-wrap;
+      font-size: large;
+      font-size: 20px;
+      
+    }
+    .removeDiv{
+      display: flex;
+      justify-content: right;
+    }
+    #inputArea{
+      font-size: large;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="addNote">
+    <textarea name="noteContent" id="inputArea" rows="4" cols="50"></textarea>
+  </div>
+  <div class="addBtnDiv"><button id="addBtn"><b>Add Note</b></button></div>
+  <div class="board"></div>
+
+  <script>
+    const colors = ["#ffeb3b","#ffc0cb","#8bc34a"]
+    const board = document.querySelector('.board')
+    const addBtn = document.querySelector('#addBtn')
+    const content = document.querySelector('#inputArea')
+    
+    addBtn.addEventListener('click',()=>{
+      
+      const note = document.createElement('div')
+      note.classList.add('note')
+      note.style.backgroundColor = colors[Math.round(Math.random()*2)]
+      const para = document.createElement('p')
+      para.textContent = '\n' + content.value
+      content.value = ""
+      const removeDiv = document.createElement('div')
+      removeDiv.classList.add('removeDiv')
+      const removeBtn = document.createElement('button')
+      removeBtn.classList.add('removeBtn')
+      removeBtn.textContent = "X"
+      
+      removeBtn.addEventListener('click',()=>{
+        removeBtn.parentNode.parentNode.remove()
+      })
+      removeDiv.appendChild(removeBtn)
+      note.appendChild(removeDiv)
+      note.appendChild(para)
+      board.appendChild(note)
+    })
+  </script>
+</body>
+</html>
