@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Eventful Gallery</title>
+  <style>
+    body {
+      background-color: #f3f3f3; 
+    }
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px; 
+      padding: 0px;
+
+  
+    }
+    .image-container {
+      position: relative;
+      width: 23vw;
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border: 2px solid #ccc; 
+      border-radius: 4px;
+    }
+    .caption {
+      text-align: center;
+      padding: 5px;
+      font-size: large;
+      font-weight: bold;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="gallery">
+    <!-- Image containers -->
+    <div class="image-container" draggable="true"><img src="images/image1.avif" alt="Interesting Image 1"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image2.avif" alt="Interesting Image 2"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image3.avif" alt="Interesting Image 3"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image4.avif" alt="Interesting Image 4"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image5.avif" alt="Interesting Image 5"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image6.avif" alt="Interesting Image 6"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image7.avif" alt="Interesting Image 7"><div class="caption">Caption here</div></div>
+    <div class="image-container" draggable="true"><img src="images/image8.avif" alt="Interesting Image 8"><div class="caption">Caption here</div></div>
+    
+  </div>
+  <script>
+
+
+    
+    const images = document.querySelectorAll('.image-container img')
+    const image_containers = document.querySelectorAll('.image-container')
+    const gallery = document.querySelector('#gallery')
+    // Function to handle adding captions
+    function addCaption(event) {
+      // Prompt for caption text
+      // Create caption element and add below the image
+      const input = prompt("Enter the caption")
+      if (input!='') {
+        event.target.nextSibling.textContent = input
+      }
+    }
+
+    // Function to handle removing images
+    function removeImage(event) {
+      // Remove the image from the gallery
+      console.log(event.target.parentNode.remove())
+    }
+
+    // Function to handle dragging images
+    function dragImage(event) {
+      // Allow dragging of the image
+      event.dataTransfer.setData('text/plain', event.target.closest('.image-container').getAttribute('data-id'))
+      
+    }
+
+    // Function to handle dropping images
+    function dropImage(event) {
+      // Handle the drop event to rearrange the image
+      event.preventDefault()
+      const droppedId = event.dataTransfer.getData('text/plain')
+      const droppedElement = document.querySelector(`[data-id="${droppedId}"]`)
+      const dropZone = event.target.closest('.image-container')
+
+      if (dropZone && droppedElement !== dropZone) {
+        gallery.insertBefore(droppedElement, dropZone)
+      }
+      
+    }
+
+    // Function to prevent default context menu
+    function customContextMenu(event) {
+      // Prevent default context menu
+      // Display custom context menu (if you wish to create one)
+      event.preventDefault()
+      const menu = document.createElement('div')
+      menu.textContent = "The information is hidden"
+      menu.style.position = 'absolute'
+      menu.style.left = `${event.pageX}px`
+      menu.style.top = `${event.pageY}px`
+      menu.style.backgroundColor = 'red'
+      menu.style.fontSize = 'xx-large'
+      gallery.appendChild(menu)
+      setTimeout(()=>{
+        menu.remove()
+      },500)
+      
+    }
+
+
+    // Add event listeners to the gallery for the above functionalities
+
+    // there was a issue if both dbl click and click event listners were attached to same element (image) the single click event was only triggering even 
+    // after performing double click there were two choices:
+    // 1. Target the add caption div for adding caption and image for removing it
+    // 2. Use timers to resolve the conflict I implented the 2 choice 
+
+    // images.forEach((image) => {
+
+    //   image.addEventListener('dblclick',removeImage)
+      
+    // })
+
+    // images.forEach((image)=>{
+    //   image.addEventListener('click',addCaption)
+    // })
+
+    let clickTimer = null;
+
+    images.forEach((image) => {
+      image.addEventListener('click', (event) => {
+        if (clickTimer !== null) {
+          clearTimeout(clickTimer);
+          clickTimer = null;
+        } else {
+          clickTimer = setTimeout(() => {
+            addCaption(event);
+            clickTimer = null;
+          }, 300); // Delay for 300ms
+        }
+      });
+
+      image.addEventListener('dblclick', (event) => {
+        clearTimeout(clickTimer);
+        clickTimer = null;
+        removeImage(event);
+      });
+    });
+
+    image_containers.forEach((container,index)=>{
+      container.setAttribute('data-id',index)
+      container.addEventListener('dragstart',dragImage)
+      container.addEventListener('dragover',(event)=>event.preventDefault())
+      container.addEventListener('drop',dropImage)
+    })
+
+    //console.log(image_containers[0])
+
+    images.forEach((image) => {
+      image.addEventListener('contextmenu',customContextMenu)
+    })
+  </script>
+</body>
+</html>
