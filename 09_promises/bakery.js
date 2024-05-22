@@ -101,3 +101,19 @@ async function timeTravelMessages() {
 // sendMessageToPast("Check for off-by-one errors!",3000)
 
 
+fetch("https://api.chucknorris.io/jokes/random")
+.then((response)=>{
+    // console.log(response)
+    // console.log(typeof response)
+    // console.log(response.json)
+    // console.log(response.json())
+    return response.json()
+    
+})
+.then((data)=>{
+    //console.log(data)
+    console.log(data.value)
+})
+.catch(()=>{
+    console.log("Error!")
+})

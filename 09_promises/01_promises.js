@@ -100,3 +100,5 @@ fetch('https://api.github.com/users/hiteshchoudhary')
 
 // promise.all
 // yes this is also available, kuch reading aap b kro.
+
+// why fetch output is displayes first -- priority queue
