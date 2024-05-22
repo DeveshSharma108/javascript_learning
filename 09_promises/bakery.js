@@ -31,8 +31,73 @@ function placeOrder(cake){
     .finally(()=>{console.log("Have a nice day 🙏\n")})
 }
 
-placeOrder("Red Velvet cake")
-placeOrder("Cheese cake")
-placeOrder("Atta Jaggery cake")
-placeOrder("Black Forest cake")
-placeOrder("Fruit cake")
+// placeOrder("Red Velvet cake")
+// placeOrder("Cheese cake")
+// placeOrder("Atta Jaggery cake")
+// placeOrder("Black Forest cake")
+// placeOrder("Fruit cake")
+
+
+function sendMessageToPast(message, delay) {
+    const trasmission = new Promise(function(resolve){
+        setTimeout(()=>{
+            resolve(message)
+        },delay)
+    })
+    return trasmission
+}
+
+async function timeTravelMessages() {
+    try {
+        console.log("Sending messages to the past...")
+        await sendMessageToPast("Don't forget semicolons!", 1000)
+        console.log("Message 1 sent!")
+        await sendMessageToPast("Always comment your code!", 2000)
+        console.log("Message 2 sent!")
+        await sendMessageToPast("Check for off-by-one errors!", 3000)
+        console.log("Message 3 sent!")
+        console.log("All messages sent to the past!")
+    } catch (error) {
+        console.error("Error sending messages:", error)
+    }
+}
+
+// timeTravelMessages()
+
+
+
+
+// function sendMessageToPast(message, delay) {
+//     const trasmission = new Promise(function(resolve){
+//         setTimeout(()=>{
+//             resolve(message)
+//             console.log(message)
+//         },delay)
+//     })
+//     return trasmission
+// }
+
+// async function timeTravelMessages(message,delay) {
+//     await sendMessageToPast(message, delay)
+// }
+
+
+// timeTravelMessages("Don't forget semicolons!",1000)
+// timeTravelMessages("Always comment your code!",2000)
+// timeTravelMessages("Check for off-by-one errors!",3000)
+
+
+// function sendMessageToPast(message, delay) {
+//     const trasmission = new Promise(function(resolve){
+//         setTimeout(()=>{
+//             resolve(message)
+//             console.log(message)
+//         },delay)
+//     })
+// }
+
+// sendMessageToPast("Don't forget semicolons!",1000)
+// sendMessageToPast("Always comment your code!",2000)
+// sendMessageToPast("Check for off-by-one errors!",3000)
+
+
