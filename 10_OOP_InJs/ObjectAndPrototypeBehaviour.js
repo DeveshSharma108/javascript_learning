@@ -188,3 +188,41 @@ anotherUsername.trueLength()
 "hitesh".trueLength()
 "iceTea".trueLength()
 */
+
+
+
+
+
+
+
+/*
+
+const creature = {
+    name:"mythical creature",
+    enviornment:"fantasy world",
+    speak: function(){
+        console.log(`I am ${this.name} and I live in ${this.enviornment}`)
+    }
+}
+
+const dragon = {
+    ability: "fire attack",
+    nature: "aggressive",
+    attack: function(){
+        console.log("🔥🔥🔥🔥")
+    }
+}
+
+const unicorn = {
+    ability: "fly",
+    nautre: "shy",
+    fly: function(){
+        console.log("🦄🦄🪽🪽")
+    }
+
+}
+
+Object.setPrototypeOf(dragon,creature)
+dragon.speak()
+
+*/
