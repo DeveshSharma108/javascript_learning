@@ -1,33 +1,76 @@
-const creature = {
-    name:"mythical creature",
-    enviornment:"fantasy world",
-    speak: function(){
-        console.log(`I am ${this.name} and I live in ${this.enviornment}`)
+// Understand what is happening in the example...
+// function Creature(name, environment) {
+//     this.name = name
+//     this.environment = environment
+// }
+
+// Creature.prototype.speak = function() {
+//     console.log(`I am ${this.name} and I live in ${this.environment}`);
+// }
+
+// Creature.prototype.discoverSecret = function() {
+//     console.log(this.secretMessage)
+// }
+
+// function Dragon(name, environment, ability, nature, secretMessage) {
+//     Creature.call(this, name, environment);
+//     this.ability = ability
+//     this.nature = nature
+//     this.secretMessage = secretMessage
+// }
+
+
+// Dragon.prototype = Object.create(Creature.prototype)
+// Dragon.prototype.constructor = Dragon
+
+
+// function Unicorn(name, environment, ability, nature, secretMessage) {
+//     Creature.call(this, name, environment)
+//     this.ability = ability
+//     this.nature = nature
+//     this.secretMessage = secretMessage
+// }
+
+
+// Unicorn.prototype = Object.create(Creature.prototype)
+// Unicorn.prototype.constructor = Unicorn
+
+// const dragon = new Dragon("Dragon", "fantasy world", "fire attack", "aggressive", "Fire burns bright,");
+// const unicorn = new Unicorn("Unicorn", "fantasy world", "fly", "shy", "in the light of the stars.");
+
+
+// dragon.speak()
+// unicorn.speak()
+// dragon.discoverSecret()
+// unicorn.discoverSecret()
+
+
+// console.log(`${dragon.secretMessage} ${unicorn.secretMessage}`)
+
+//console.log(Object.create(Creature.prototype))
+// console.log(Creature.prototype.constructor)
+// console.log(Dragon.prototype.constructor)
+
+
+const arr1 = [1,2,3,4,"abc"]
+const arr2 = [1,5,9,10]
+const arr3 = [-1,0,10000,1.5]
+//console.log(arr1.allNumbers())  // will give error because no such function for arrays in js let make it
+
+Array.prototype.allNumbers = function(){
+    for (let index = 0; index < this.length; index++) {
+        if(typeof this[index] != "number"){
+            return false
+        }
+        
     }
+    return true
 }
 
-const dragon = {
-    ability: "fire attack",
-    nature: "aggressive",
-    attack: function(){
-        console.log("🔥🔥🔥🔥")
-    },
-    secretMessage: "Fire burns bright,"
-}
+console.log(arr1.allNumbers())
+console.log(arr2.allNumbers())
+console.log(arr3.allNumbers())
 
-const unicorn = {
-    ability: "fly",
-    nature: "shy",
-    fly: function(){
-        console.log("🦄🦄🪽🪽")
-    },
-    secretMessage: "in the light of the stars."
-
-}
-
-Object.setPrototypeOf(dragon,creature)
-Object.setPrototypeOf(unicorn,creature)
-dragon.speak()
 
 
 /*
