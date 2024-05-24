@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bind</title>
+    <style>
+      body{
+        background-color: black;
+      }
+      button {
+        font-size: xx-large;
+        margin: 10px;
+      }
+      .user_div{
+        font-size: x-larger;
+        color: wheat;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="display"></div>
+    <script>
+      const display = document.querySelector('#display')
+      class User {
+        constructor(name, canClick) {
+          this.name = name;
+          this.canClick = canClick;
+
+          
+
+          this.newLine = document.createElement('br')
+          display.appendChild(this.newLine)
+
+          this.user_name = document.createElement('div')
+          this.user_name.classList.add('user_div')
+          this.user_name.textContent = `${this.name}'s buttons`
+          display.appendChild(this.user_name)
+
+          this.likeButton = document.createElement('button')
+          this.likeButton.classList.add('likeButton')
+          this.likeButton.textContent = 'Like'
+          display.appendChild(this.likeButton)
+
+          this.shareButton = document.createElement('button')
+          this.shareButton.classList.add('shareButton')
+          this.shareButton.textContent = 'Share'
+          display.appendChild(this.shareButton)
+
+          this.deleteButton = document.createElement('button')
+          this.deleteButton.classList.add('deleteButton')
+          this.deleteButton.textContent = 'Delete'
+          display.appendChild(this.deleteButton)
+
+
+
+
+          this.likeButton.addEventListener(
+            "click",
+            this.handleButtonClick.bind(this, "liked")
+          );
+
+          this.shareButton.addEventListener(
+            "click",
+            this.handleButtonClick.bind(this, "shared")
+          );
+
+          this.deleteButton.addEventListener(
+            "click",
+            this.handleButtonClick.bind(this, "deleted")
+          );
+          
+        }
+
+        handleButtonClick(action) {
+          if (this.canClick) {
+            console.log(`${this.name} ${action} the post.`);
+          } else {
+            console.log(`${this.name} you do not have the access .`);
+          }
+        }
+      }
+
+      const Alice = new User("Alice", true)
+      const Bob = new User("Bob", false)
+    </script>
+  </body>
+</html>
