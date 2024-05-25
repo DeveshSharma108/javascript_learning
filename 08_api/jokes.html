@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes Generator</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: black;
+        }
+        .heading{
+            color: wheat;
+            border: solid wheat;
+            padding-left: 10px;
+            margin: 20px;
+            width: 380px;
+            height: auto;
+            position: relative;
+            left: 35%;
+            
+        }
+        .GetJoke{
+            font-size: larger;
+            background-color: blanchedalmond;
+            position: relative;
+            left: 45%;
+        }
+        .jokeDiv{
+            color: wheat;
+            border: dotted whitesmoke;
+            padding: 10px;
+            margin: 20px;
+            width: 380px;
+            height: auto;
+            position: relative;
+            left: 35%;
+            font-size: x-large;
+
+        }
+
+    </style>
+    <div class="heading"><h1>Chuck Norris Jokes Generator</h1></div>
+    <button class="GetJoke">Get Joke</button>
+    
+    
+    <script>
+        
+        const body = document.querySelector('body')
+        const getJokeButton = document.querySelector('.GetJoke')
+        const jokeDiv = document.createElement('div')
+        jokeDiv.classList.add('jokeDiv')
+        
+ 
+        getJokeButton.addEventListener('click',()=>{
+        const requestUrl = "https://api.chucknorris.io/jokes/random"
+        const xhr = new XMLHttpRequest()
+        xhr.open("GET",requestUrl)
+        xhr.onreadystatechange = function(){
+            console.log(xhr.readyState)
+            if(xhr.readyState === 4){
+                const joke = JSON.parse(xhr.responseText).value
+                
+                jokeDiv.textContent = joke
+                body.appendChild(jokeDiv)
+            }
+        }
+        xhr.send()
+        })
+        
+
+    </script>
+</body>
+</html>
