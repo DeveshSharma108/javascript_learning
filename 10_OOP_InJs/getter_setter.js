@@ -1,4 +1,4 @@
-const myChest = {
+const mychest = {
     name: "Secret Chest",
     _secret: "k.o.",
 
@@ -12,7 +12,7 @@ const myChest = {
     }
 }
 
-console.log(myChest.secret)
+console.log(mychest.secret)
 
 
 /*
@@ -92,3 +92,61 @@ const tea = Object.create(User)
 console.log(tea.email);
 
 */
+
+
+
+// const myChest = {
+//     _secret: null,
+//     _secretKey: "1234", // Predefined key for simplicity
+//     _secret2: null,
+//     _secretKey2: "5678", // Predefined key for the second secret
+// };
+
+// Object.defineProperty(myChest, 'secret', {
+//     get: function(key) {
+//         if (key === this._secretKey) {
+//             return this._secret;
+//         } else {
+//             return "Incorrect key!";
+//         }
+//     },
+//     set: function({key, value}) {
+//         if (key === this._secretKey) {
+//             this._secret = value;
+//         } else {
+//             console.log("Incorrect key!");
+//         }
+//     }
+// });
+
+// Object.defineProperty(myChest, 'secret2', {
+//     get: function(key) {
+//         if (key === this._secretKey2) {
+//             return this._secret2;
+//         } else {
+//             return "Incorrect key!";
+//         }
+//     },
+//     set: function({key, value}) {
+//         if (key === this._secretKey2) {
+//             this._secret2 = value;
+//         } else {
+//             console.log("Incorrect key!");
+//         }
+//     }
+// });
+
+// // Demonstrating the magical properties
+// console.log("Setting secret with correct key...");
+// myChest.secret = {key: "1234", value: "The treasure is buried under the old oak tree."};
+// console.log("Getting secret with correct key...");
+// console.log(myChest.secret("1234")); // Output: The treasure is buried under the old oak tree.
+// console.log("Getting secret with incorrect key...");
+// console.log(myChest.secret("wrong_key")); // Output: Incorrect key!
+
+// console.log("Setting second secret with correct key...");
+// myChest.secret2 = {key: "5678", value: "The second treasure is in the cave."};
+// console.log("Getting second secret with correct key...");
+// console.log(myChest.secret2("5678")); // Output: The second treasure is in the cave.
+// console.log("Getting second secret with incorrect key...");
+// console.log(myChest.secret2("wrong_key")); // Output: Incorrect key!
