@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Async Adventure Park</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Async Adventure Park!</h1>
+  <div id="rollerCoaster"></div>
+  <div id="ferrisWheel"></div>
+  <div id="hauntedHouse"><button>Exit Haunted house</button></div>
+  <div id="merryGoRound"></div>
+
+  <script>
+    const rollerCoaster = document.querySelector('#rollerCoaster')
+    const ferrisWheel = document.querySelector('#ferrisWheel')
+    const hauntedHouse = document.querySelector('#hauntedHouse')
+    const merryGoRound = document.querySelector('#merryGoRound')
+    const hauntedExit = document.querySelector('#hauntedHouse button')
+
+    rollerCoaster.textContent = "Welcome to the Roller Coaster Ride!"
+    setTimeout(()=>{
+        rollerCoaster.textContent = "Hold on tight! 🎢"
+    },3000)
+
+
+    ferrisWheel.textContent  = "Ferris Wheel turning..."
+    ferrisWheelTimer = setInterval(()=>{
+        ferrisWheel.textContent = "Ferris Wheel turning..."
+    },2000)
+    setTimeout(()=>{
+        ferrisWheel.textContent = "Ferris Wheel stopped."
+        clearInterval(ferrisWheelTimer)
+    },10000)
+
+    hauntedHouseTimer = setTimeout(()=>{
+        hauntedHouse.textContent = "Spooky ghosts! Run!"
+    },5000)
+    hauntedExit.addEventListener('click',()=>{
+        clearTimeout(hauntedHouseTimer)
+        hauntedHouse.textContent = "You escaped the Haunted House."
+    })
+
+    
+    
+    
+  </script>
+</body>
+</html>
